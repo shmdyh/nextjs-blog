@@ -16,6 +16,15 @@ export async function getStaticProps() {
 
 //export default function Home({ allPostsData }) {
 export default function Home({ allPostsData }) {
+  console.log('process.cwd(): ' + process.cwd());
+  const path = require('path');
+  console.log(path.resolve('./'));   // -> /path/to/app
+  console.log(path.resolve('../'));  // -> /path/to
+  console.log(__dirname);            // -> /path/to/app
+  console.log(__filename);
+console.log(__dirname);
+
+console.log("----");
   return (
     <Layout home>
       <Head>…</Head>
@@ -25,14 +34,14 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-            <Link href="/posts/[id]" as={`/posts/${id}`}>
-              <a>{title}</a>
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              <Date dateString={date} />
-            </small>
-          </li>
+              <Link href="/posts/[id]" as={`/posts/${id}`}>
+                <a>{title}</a>
+              </Link>
+              <br />
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
+            </li>
           ))}
         </ul>
       </section>
